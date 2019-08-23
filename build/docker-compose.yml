@@ -1,0 +1,46 @@
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+
+  ### Web Server #######################################
+  web:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        - COMPOSER_INSTALL=${PHP_COMPOSER_INSTALL}
+        - COMPOSER_INSTALL_DEV=${PHP_COMPOSER_INSTALL_DEV}
+        - INSTALL_SSH2=${PHP_INSTALL_SSH2}
+        - INSTALL_SOAP=${PHP_INSTALL_SOAP}
+        - INSTALL_XSL=${PHP_INSTALL_XSL}
+        - INSTALL_BCMATH=${PHP_INSTALL_BCMATH}
+        - INSTALL_IMAP=${PHP_INSTALL_IMAP}
+        - INSTALL_IMAGICK=${PHP_INSTALL_IMAGICK}
+        - INSTALL_MYSQLI=${PHP_INSTALL_MYSQLI}
+        - INSTALL_MSSQL=${PHP_INSTALL_MSSQL}
+        - INSTALL_MONGO=${PHP_INSTALL_MONGO}
+        - INSTALL_PGSQL=${PHP_INSTALL_PGSQL}
+        - INSTALL_SOCKETS=${PHP_INSTALL_SOCKETS}
+        - INSTALL_RDKAFKA=${PHP_INSTALL_RDKAFKA}
+        - INSTALL_PHPREDIS=${PHP_INSTALL_PHPREDIS}
+        - INSTALL_NODE=${PHP_INSTALL_NODE}
+        - INSTALL_YARN=${PHP_INSTALL_YARN}
+    volumes:
+      - ../:/var/www:cached
+      - ../deploy/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ../deploy/shared/web:/etc/supervisord.d
+      - ../deploy/shared/sites:/etc/nginx/sites-available
+      - ../deploy/shared/ssl/:/etc/nginx/ssl
+      - ../deploy/shared/logs/nginx/:/var/log/nginx
+      - ../deploy/shared/logs/supervisor/:/var/log/supervisor
+    ports:
+      - "${NGINX_HTTP_PORT}:80"
+      - "${NGINX_HTTPS_PORT}:443"
+    environment:
+      - PHP_IDE_CONFIG=serverName=docker
+    networks:
+      - backend
