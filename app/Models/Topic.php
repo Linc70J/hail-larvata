@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\OrderScopeHelper;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -26,8 +27,8 @@ use DB;
  * @property string|null $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read TopicCategory $category
- * @property-read Collection|TopicReply[] $replies
+ * @property-read TopicCategory $topicCategory
+ * @property-read Collection|TopicReply[] $topicReplies
  * @property-read User $user
  * @method static Builder|Topic newModelQuery()
  * @method static Builder|Topic newQuery()
@@ -51,7 +52,7 @@ use DB;
  * @method static Builder|Topic whereUserId($value)
  * @method static Builder|Topic whereViewCount($value)
  * @method static Builder|Topic withOrder($order)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class Topic extends Model
 {
