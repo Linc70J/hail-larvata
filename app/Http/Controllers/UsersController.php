@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
@@ -25,8 +24,8 @@ class UsersController extends Controller
         $this->authorize('update', $user);
         $data = $request->all();
 
-        if ($request->avatar) {
-            $result = $uploader->save($request->avatar, 'avatars', $user->id, 362);
+        if ($request->has('avatar')) {
+            $result = $uploader->save($request->get('avatar'), 'avatars', $user->id, 362);
             if ($result) {
                 $data['avatar'] = $result['path'];
             }

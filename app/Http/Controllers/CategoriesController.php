@@ -14,7 +14,7 @@ class CategoriesController extends Controller
     public function show(TopicCategory $category, Request $request, Topic $topic, User $user, Link $link)
     {
         // 讀取分類 ID 關聯的話題
-        $topics = $topic->withOrder($request->order)
+        $topics = $topic->withOrder($request->get('order', 'default'))
                         ->where('topic_category_id', $category->id)
                         ->paginate(20);
         // 活躍用戶列表

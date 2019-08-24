@@ -40,12 +40,7 @@ Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');
 
-Route::group(array('domain' => config('administrator.domain'), 'prefix' => config('administrator.uri'), 'middleware' => 'App\Http\Middleware\ValidateAdmin'), function () {
-
-    // hack by @Monkey: for custom route
-    // Route::group(['prefix' => 'custom'], function () {
-    //     require config('administrator.custom_routes_file');
-    // });
+Route::group(array('prefix' => config('administrator.uri'), 'middleware' => 'App\Http\Middleware\ValidateAdmin'), function () {
 
     //Admin Dashboard
     Route::get('/', array(

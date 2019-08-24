@@ -20,7 +20,7 @@ class TopicsController extends Controller
 
 	public function index(Request $request, Topic $topic, User $user, Link $link)
     {
-        $topics = $topic->withOrder($request->order)->paginate(20);
+        $topics = $topic->withOrder($request->get('order', 'default'))->paginate(20);
         $active_users = $user->getActiveUsers();
         $links = $link->getAllCached();
 
@@ -30,7 +30,7 @@ class TopicsController extends Controller
     public function show(Request $request, Topic $topic)
     {
         // URL 矫正
-        if ( ! empty($topic->slug) && $topic->slug != $request->slug) {
+        if ( ! empty($topic->slug) && $topic->slug != $request->get('slug')) {
             return redirect($topic->link(), 301);
         }
 
@@ -80,17 +80,17 @@ class TopicsController extends Controller
         // 初始化返回数据，默认是失败的
         $data = [
             'success'   => false,
-            'msg'       => '上传失败!',
+            'msg'       => '上傳失敗!',
             'file_path' => ''
         ];
         // 判断是否有上传文件，并赋值给 $file
-        if ($file = $request->upload_file) {
+        if ($file = $request->get('upload_file')) {
             // 儲存图片到本地
-            $result = $uploader->save($request->upload_file, 'topics', \Auth::id(), 1024);
+            $result = $uploader->save($file, 'topics', Auth::id(), 1024);
             // 图片儲存成功的话
             if ($result) {
                 $data['file_path'] = $result['path'];
-                $data['msg']       = "上传成功!";
+                $data['msg']       = "上傳成功!";
                 $data['success']   = true;
             }
         }

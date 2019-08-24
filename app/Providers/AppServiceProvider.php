@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
             $view->itemId = isset($view->itemId) ? $view->itemId : null;
         });
 
-//admin settings view
+        //admin settings view
         View::composer('administrator.settings', function ($view) {
             $config = app('itemconfig');
             $fieldFactory = app('admin_field_factory');
@@ -72,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
             $view->route = $route['path'].'/';
         });
 
-//header view
+        //header view
         View::composer(array('administrator.partials.header'), function ($view) {
             $view->menu = app('admin_menu')->getMenu();
             $view->settingsPrefix = app('admin_config_factory')->getSettingsPrefix();
@@ -80,7 +80,7 @@ class AppServiceProvider extends ServiceProvider
             $view->configType = app()->bound('itemconfig') ? app('itemconfig')->getType() : false;
         });
 
-//the layout view
+        //the layout view
         View::composer(array('administrator.layouts.default'), function ($view) {
 
             $view->config = app('itemconfig');
