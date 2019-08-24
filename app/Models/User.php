@@ -31,7 +31,7 @@ use Str;
  * @property string|null $avatar
  * @property string|null $introduction
  * @property int $notification_count
- * @property string|null $last_actived_at
+ * @property string|null $last_active_at
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read Collection|Permission[] $permissions
  * @property-read Collection|TopicReply[] $replies
@@ -49,7 +49,7 @@ use Str;
  * @method static Builder|User whereEmailVerifiedAt($value)
  * @method static Builder|User whereId($value)
  * @method static Builder|User whereIntroduction($value)
- * @method static Builder|User whereLastActivedAt($value)
+ * @method static Builder|User whereLastActiveAt($value)
  * @method static Builder|User whereName($value)
  * @method static Builder|User whereNotificationCount($value)
  * @method static Builder|User wherePassword($value)
@@ -59,7 +59,7 @@ use Str;
  */
 class User extends Authenticatable
 {
-    //use Traits\LastActiveAtHelper;
+    use Traits\LastActiveAtHelper;
     use Traits\ActiveUserHelper;
     use HasRoles;
     use Notifiable {
@@ -112,7 +112,7 @@ class User extends Authenticatable
         return $this->id == $model->user_id;
     }
 
-    public function replies()
+    public function topicReplies()
     {
         return $this->hasMany(TopicReply::class);
     }

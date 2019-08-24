@@ -20,7 +20,7 @@ class TopicsTableSeeder extends Seeder
             ->each(function ($topic, $index)
             use ($user_ids, $category_ids, $faker) {
                 $topic->user_id = $faker->randomElement($user_ids);
-                $topic->category_id = $faker->randomElement($category_ids);
+                $topic->topic_category_id = $faker->randomElement($category_ids);
             });
 
         Topic::insert($topics->toArray());

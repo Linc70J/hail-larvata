@@ -18,7 +18,7 @@ use DB;
  * @property string $title
  * @property string $body
  * @property int $user_id
- * @property int $category_id
+ * @property int $topic_category_id
  * @property int $reply_count
  * @property int $view_count
  * @property int $last_reply_user_id
@@ -39,7 +39,7 @@ use DB;
  * @method static Builder|Topic recentReplied()
  * @method static Builder|Topic whereBody($value)
  * @method static Builder|Topic whereBuId($value)
- * @method static Builder|Topic whereCategoryId($value)
+ * @method static Builder|Topic whereTopicCategoryId($value)
  * @method static Builder|Topic whereCreatedAt($value)
  * @method static Builder|Topic whereExcerpt($value)
  * @method static Builder|Topic whereId($value)
@@ -60,7 +60,7 @@ class Topic extends Model
 
     protected $hot_days = 30;    // 多少天内的熱門話題
 
-    protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
+    protected $fillable = ['title', 'body', 'topic_category_id', 'excerpt', 'slug'];
 
     public function topicReplies()
     {
@@ -99,7 +99,7 @@ class Topic extends Model
     public function scopeRecentHot(Builder $query)
     {
         $dataTime =  Carbon::now()->subDays($this->hot_days)->toDateTimeString();
-        return $query->orderBy(DB::raw("(select count(*) from `replies` where `topics`.`id` = `replies`.`topic_id` and `replies`.`updated_at` > '${$dataTime}')"), 'desc');
+        return $query->orderBy(DB::raw("(select count(*) from `topic_replies` where `topics`.`id` = `topic_replies`.`topic_id` and `topic_replies`.`updated_at` > '${dataTime}')"), 'desc');
     }
 
     public function scopeRecentReplied(Builder $query)
