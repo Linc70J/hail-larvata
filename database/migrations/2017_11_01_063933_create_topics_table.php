@@ -17,6 +17,7 @@ class CreateTopicsTable extends Migration
             $table->integer('reply_count')->unsigned()->default(0);
             $table->integer('view_count')->unsigned()->default(0);
             $table->integer('last_reply_user_id')->unsigned()->default(0);
+            $table->boolean('top')->default(0);
             $table->integer('order')->unsigned()->default(0);
             $table->text('excerpt');
             $table->string('slug')->nullable();

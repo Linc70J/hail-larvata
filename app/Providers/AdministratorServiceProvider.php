@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Administrator\Menu;
+use App\Administrator\Admin;
 use App\Administrator\Validator;
 use Illuminate\Support\ServiceProvider;
 use App\Administrator\DataTable\DataTable;
@@ -77,7 +77,7 @@ class AdministratorServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('admin_menu', function ($app) {
-            return new Menu($app->make('config'), $app->make('admin_config_factory'));
+            return new Admin($app->make('config'), $app->make('admin_config_factory'));
         });
     }
 }

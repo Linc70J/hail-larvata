@@ -82,14 +82,14 @@ class Topic extends Model
     {
         // 不同的排序，使用不同的讀取邏輯
         switch ($order) {
-            case 'recent':
-                $query = $this->recent();
+            case 'replied':
+                $query = $this->recentReplied();
                 break;
             case 'hot':
                 $query = $this->recentHot();
                 break;
             default:
-                $query = $this->recentReplied();
+                $query = $this->recent();
                 break;
         }
         // 預加载防止 N+1 問題

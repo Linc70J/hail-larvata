@@ -17,12 +17,12 @@
 
                 <div class="panel-heading">
                     <ul class="nav nav-pills">
-                        <li class="{{ active_class(( !(if_query('order', 'hot') || if_query('order', 'recent')) )) }}">
+                        <li class="{{ active_class( !(if_query('order', 'hot') || if_query('order', 'replied'))) }}">
+                            <a href="{{ Request::url() }}?order=recent">最新話題</a></li>
+                        <li class="{{ active_class((if_query('order', 'hot') )) }}">
+                            <a href="{{ Request::url() }}?order=hot">熱門話題</a></li>
+                        <li class="{{ active_class(( if_query('order', 'replied') )) }}">
                             <a href="{{ Request::url() }}?order=default">最後回覆</a></li>
-                        <li class="{{ active_class((if_query('order', 'hot') )) }}"><a
-                                href="{{ Request::url() }}?order=hot">熱門話題</a></li>
-                        <li class="{{ active_class(if_query('order', 'recent')) }}"><a
-                                href="{{ Request::url() }}?order=recent">最新發布</a></li>
                     </ul>
                 </div>
 

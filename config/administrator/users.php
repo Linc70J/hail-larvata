@@ -13,7 +13,7 @@ return [
     'model'   => User::class,
 
     // 设置当前页面的访问權限，通过返回布尔值来控制權限。
-    // 返回 True 即通过權限验证，False 则无权访问并从 Menu 中隐藏
+    // 返回 True 即通过權限验证，False 则无权访问并从 Admin 中隐藏
     'permission'=> function()
     {
         return Auth::user()->can('manage_users');

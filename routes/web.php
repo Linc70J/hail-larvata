@@ -100,6 +100,7 @@ Route::group(array('prefix' => config('administrator.uri'), 'middleware' => 'App
 
     //The route group for all other requests needs to validate admin, model, and add assets
     Route::group(array('middleware' => ['App\Http\Middleware\ValidateModel', 'App\Http\Middleware\PostValidate']), function () {
+
         //Model Index
         Route::get('{model}', array(
             'as'   => 'admin_index',
@@ -178,5 +179,4 @@ Route::group(array('prefix' => config('administrator.uri'), 'middleware' => 'App
             'uses' => 'AdminController@batchDelete',
         ));
     });
-
 });

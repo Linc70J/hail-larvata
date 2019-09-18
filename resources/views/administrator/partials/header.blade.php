@@ -3,17 +3,6 @@
 		<a href="{{route('admin_dashboard')}}">{{config('administrator.title')}}</a>
 	</h1>
 
-	<a href="#" id="menu_button"><div></div></a>
-	<a href="#" id="filter_button" class="{{$configType === 'model' ? '' : 'hidden'}}"><div></div></a>
-
-	<div id="mobile_menu_wrapper">
-		<ul id="mobile_menu">
-			@foreach ($menu as $key => $item)
-				@include('administrator.partials.menu_item')
-			@endforeach
-		</ul>
-	</div>
-
 	<ul id="menu">
 		@foreach ($menu as $key => $item)
 			@include('administrator.partials.menu_item')
