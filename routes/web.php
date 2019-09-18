@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function (){
-    return 'test';
+    return "Your IP address is ".$_SERVER['REMOTE_ADDR'];
 });
 
 // Authentication Routes...
